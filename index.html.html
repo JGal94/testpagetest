@@ -105,6 +105,109 @@
     animation-fill-mode: forwards;
   }
 
+  /* ── Envelope container ── */
+  .envelope-container {
+    position: relative;
+  }
+
+  .envelope-outer {
+    background: linear-gradient(150deg, #fffdf0 0%, #fff5e6 50%, #ffeaf2 100%);
+    border: 2px solid var(--blush);
+    border-radius: 16px;
+    height: 280px;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 20px 60px rgba(224, 168, 0, 0.15);
+    overflow: hidden;
+    max-height: 300px;
+    transition: opacity 0.4s ease 0.5s, transform 0.4s ease 0.5s,
+                max-height 0.01s ease 0.95s, padding 0.01s ease 0.95s,
+                border-width 0.01s ease 0.95s, margin 0.01s ease 0.95s;
+  }
+
+  .envelope-outer:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 28px 70px rgba(224, 168, 0, 0.25);
+  }
+
+  /* decorative bottom V fold */
+  .envelope-outer::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 0;
+    border-left: 50vw solid #f7d0df;
+    border-right: 50vw solid #f7d0df;
+    border-top: 110px solid transparent;
+  }
+
+  /* ── Top flap ── */
+  .flap-wrapper {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    perspective: 900px;
+    z-index: 3;
+  }
+
+  .envelope-flap {
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(180deg, #f5b8d0 0%, #f0a0c0 100%);
+    clip-path: polygon(0 0, 100% 0, 50% 80%);
+    transform-origin: top center;
+    transform: rotateX(0deg);
+    transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+    backface-visibility: hidden;
+  }
+
+  .envelope-container.open .envelope-flap {
+    transform: rotateX(-180deg);
+  }
+
+  /* ── Envelope center info ── */
+  .envelope-center {
+    position: absolute;
+    bottom: 48px; left: 0; right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .wax-seal {
+    font-size: 3.2rem;
+    filter: drop-shadow(0 4px 8px rgba(224,168,0,0.35));
+    animation: heartbeat 1.8s ease infinite;
+  }
+
+  .envelope-to {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+    color: var(--rose);
+    margin: 0;
+  }
+
+  .click-hint {
+    font-size: 0.78rem;
+    color: #b8860b;
+    opacity: 0.65;
+    letter-spacing: 2px;
+    font-style: italic;
+  }
+
+  /* ── Open state: hide envelope ── */
+  .envelope-container.open .envelope-outer {
+    opacity: 0;
+    transform: scale(0.95) translateY(-12px);
+    max-height: 0;
+    border-width: 0;
+    margin-bottom: 0;
+    pointer-events: none;
+  }
+
+  /* ── Letter card ── */
   .letter-card {
     background: white;
     border-radius: 24px;
@@ -113,6 +216,17 @@
     border: 2px solid var(--blush);
     position: relative;
     overflow: hidden;
+    display: none;
+  }
+
+  .envelope-container.open .letter-card {
+    display: block;
+    animation: letterReveal 0.7s ease 0.7s both;
+  }
+
+  @keyframes letterReveal {
+    from { opacity: 0; transform: translateY(35px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
   }
 
   .letter-card::before {
@@ -371,12 +485,29 @@
 
 <!-- CARTA -->
 <section class="letter-section">
-  <div class="letter-card">
-    <p>Mi querida Dilana,</p>
-    <p>Hay personas que llegan a tu vida y la cambian para siempre. Tú eres una de esas personas. Desde el primer momento, algo en mí supo que eras especial — y cada día que pasa me confirma lo afortunado que soy de tenerte.</p>
-    <p>Tu sonrisa tiene el poder de convertir los días más grises en algo brillante. Tu forma de ver el mundo, de reír, de ser tú misma... me enamora más cada vez.</p>
-    <p>Esta página no es suficiente para expresar todo lo que siento. Pero espero que cada vez que la abras, recuerdes cuánto te quiero y lo importante que eres para mí. ✨</p>
-    <div class="signature">Con todo mi amor 💖</div>
+  <div class="envelope-container" id="envelopeContainer">
+
+    <!-- Closed envelope -->
+    <div class="envelope-outer" id="envelopeOuter">
+      <div class="flap-wrapper">
+        <div class="envelope-flap"></div>
+      </div>
+      <div class="envelope-center">
+        <span class="wax-seal">💌</span>
+        <p class="envelope-to">Para ti, Dilana</p>
+        <small class="click-hint">· toca para abrir ·</small>
+      </div>
+    </div>
+
+    <!-- Letter (revealed on open) -->
+    <div class="letter-card">
+      <p>Mi querida Dilana,</p>
+      <p>Hay personas que llegan a tu vida y la cambian para siempre. Tú eres una de esas personas. Desde el primer momento, algo en mí supo que eras especial — y cada día que pasa me confirma lo afortunado que soy de tenerte.</p>
+      <p>Tu sonrisa tiene el poder de convertir los días más grises en algo brillante. Tu forma de ver el mundo, de reír, de ser tú misma... me enamora más cada vez.</p>
+      <p>Esta página no es suficiente para expresar todo lo que siento. Pero espero que cada vez que la abras, recuerdes cuánto te quiero y lo importante que eres para mí. ✨</p>
+      <div class="signature">Con todo mi amor 💖</div>
+    </div>
+
   </div>
 </section>
 
@@ -482,6 +613,15 @@
     heart.style.animationDelay = (Math.random() * 10) + 's';
     heart.style.fontSize = (1 + Math.random() * 1.5) + 'rem';
     container.appendChild(heart);
+  }
+
+  // Envelope open
+  const envelopeOuter = document.getElementById('envelopeOuter');
+  if (envelopeOuter) {
+    envelopeOuter.addEventListener('click', function(e) {
+      e.stopPropagation();
+      document.getElementById('envelopeContainer').classList.add('open');
+    });
   }
 
   // Photo flip on click
