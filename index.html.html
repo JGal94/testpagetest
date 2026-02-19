@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Dilana 💕</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --pink: #f5c800;
+    --rose: #e0a800;
+    --blush: #fff3b0;
+    --cream: #fffdf0;
+    --gold: #ffdd00;
+  }
+
+  body {
+    background: var(--cream);
+    font-family: 'Playfair Display', serif;
+    overflow-x: hidden;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ctext y='28' font-size='28'%3E🌻%3C/text%3E%3C/svg%3E") 16 16, auto;
+  }
+
+  /* Floating hearts background */
+  .hearts-bg {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+  }
+
+  .heart {
+    position: absolute;
+    bottom: -60px;
+    animation: floatUp linear infinite;
+    opacity: 0;
+    font-size: 1.5rem;
+  }
+
+  @keyframes floatUp {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+    100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* Hero Section */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 20px;
+    z-index: 1;
+    background: radial-gradient(ellipse at 50% 0%, #fff0a0 0%, var(--cream) 70%);
+  }
+
+  .stamp {
+    font-size: 4rem;
+    animation: pulse 1.5s ease-in-out infinite;
+    margin-bottom: 10px;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+  }
+
+  .hero h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(3.5rem, 10vw, 7rem);
+    background: linear-gradient(135deg, var(--rose), #c8960a, var(--pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+    animation: fadeIn 1.2s ease forwards;
+  }
+
+  .hero .subtitle {
+    font-style: italic;
+    color: #c8960a;
+    font-size: clamp(1rem, 3vw, 1.4rem);
+    margin-top: 12px;
+    animation: fadeIn 1.6s ease forwards;
+    opacity: 0;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Carta */
+  .letter-section {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    margin: 0 auto 80px;
+    padding: 20px;
+    animation: fadeIn 2s ease forwards;
+    opacity: 0;
+    animation-delay: 0.8s;
+    animation-fill-mode: forwards;
+  }
+
+  .letter-card {
+    background: white;
+    border-radius: 24px;
+    padding: 50px 45px;
+    box-shadow: 0 20px 60px rgba(224, 168, 0, 0.15);
+    border: 2px solid var(--blush);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .letter-card::before {
+    content: '💌';
+    position: absolute;
+    top: -20px; right: 30px;
+    font-size: 3rem;
+  }
+
+  .letter-card p {
+    font-size: 1.15rem;
+    line-height: 1.9;
+    color: #5a4a10;
+    margin-bottom: 20px;
+  }
+
+  .letter-card .signature {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+    color: var(--rose);
+    text-align: right;
+    margin-top: 30px;
+  }
+
+  /* Razones */
+  .reasons-section {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto 80px;
+    padding: 20px;
+  }
+
+  .section-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    color: var(--rose);
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .reasons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+  }
+
+  .reason-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px 25px;
+    box-shadow: 0 10px 30px rgba(224, 168, 0, 0.1);
+    border-bottom: 4px solid var(--pink);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+  }
+
+  .reason-card:hover {
+    transform: translateY(-8px) rotate(-1deg);
+    box-shadow: 0 20px 40px rgba(224, 168, 0, 0.2);
+  }
+
+  .reason-card .icon { font-size: 2.5rem; margin-bottom: 12px; }
+  .reason-card h3 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5rem;
+    color: var(--rose);
+    margin-bottom: 8px;
+  }
+  .reason-card p { font-size: 0.95rem; color: #7a6a10; line-height: 1.6; }
+
+  /* Countdown */
+  .countdown-section {
+    position: relative; z-index: 1;
+    background: linear-gradient(135deg, #e0a800, #c8960a);
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+    margin-bottom: 80px;
+  }
+
+  .countdown-section .section-title { color: white; }
+
+  .countdown-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+
+  .count-box {
+    background: rgba(255,255,255,0.2);
+    border-radius: 20px;
+    padding: 20px 30px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+
+  .count-box .num {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3.5rem;
+    display: block;
+    line-height: 1;
+  }
+
+  .count-box .label { font-size: 0.85rem; opacity: 0.9; letter-spacing: 2px; text-transform: uppercase; }
+
+  /* Final */
+  .final-section {
+    position: relative; z-index: 1;
+    text-align: center;
+    padding: 80px 20px;
+    background: radial-gradient(ellipse at 50% 100%, #fff0a0 0%, var(--cream) 70%);
+  }
+
+  .big-heart {
+    font-size: 6rem;
+    animation: heartbeat 1s ease-in-out infinite;
+    display: block;
+    margin-bottom: 20px;
+  }
+
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    14% { transform: scale(1.2); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.15); }
+    70% { transform: scale(1); }
+  }
+
+  .final-section h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--rose);
+    margin-bottom: 15px;
+  }
+
+  .final-section p {
+    color: #7a6a10;
+    font-style: italic;
+    font-size: 1.2rem;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  /* Sparkles */
+  .sparkle {
+    position: fixed;
+    pointer-events: none;
+    font-size: 1.2rem;
+    z-index: 999;
+    animation: sparkleAnim 0.8s ease forwards;
+  }
+
+  @keyframes sparkleAnim {
+    0% { transform: scale(0) rotate(0); opacity: 1; }
+    100% { transform: scale(1.5) rotate(180deg) translateY(-40px); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Floating hearts -->
+<div class="hearts-bg" id="heartsContainer"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="stamp">🌻</div>
+  <h1>Para ti,<br>Dilana</h1>
+  <p class="subtitle">la persona más especial de mi vida 💛</p>
+</section>
+
+<!-- CARTA -->
+<section class="letter-section">
+  <div class="letter-card">
+    <p>Mi querida Dilana,</p>
+    <p>Hay personas que llegan a tu vida y la cambian para siempre. Tú eres una de esas personas. Desde el primer momento, algo en mí supo que eras especial — y cada día que pasa me confirma lo afortunado que soy de tenerte.</p>
+    <p>Tu sonrisa tiene el poder de convertir los días más grises en algo brillante. Tu forma de ver el mundo, de reír, de ser tú misma... me enamora más cada vez.</p>
+    <p>Esta página no es suficiente para expresar todo lo que siento. Pero espero que cada vez que la abras, recuerdes cuánto te quiero y lo importante que eres para mí. ✨</p>
+    <div class="signature">Con todo mi amor 💖</div>
+  </div>
+</section>
+
+<!-- RAZONES -->
+<section class="reasons-section">
+  <h2 class="section-title">Razones por las que te amo 🌷</h2>
+  <div class="reasons-grid">
+    <div class="reason-card">
+      <div class="icon">🌟</div>
+      <h3>Tu luz</h3>
+      <p>Iluminas cualquier lugar con solo estar presente. Eres la persona más brillante que conozco.</p>
+    </div>
+    <div class="reason-card">
+      <div class="icon">😂</div>
+      <h3>Tu risa</h3>
+      <p>Cuando ríes, el mundo entero parece mejor. Podría escucharte reír por siempre.</p>
+    </div>
+    <div class="reason-card">
+      <div class="icon">🧠</div>
+      <h3>Tu mente</h3>
+      <p>Eres inteligente, curiosa y sorprendente. Cada conversación contigo me hace crecer.</p>
+    </div>
+    <div class="reason-card">
+      <div class="icon">🤗</div>
+      <h3>Tu corazón</h3>
+      <p>Tienes el corazón más grande y más bonito. Tu forma de cuidar a quienes amas es única.</p>
+    </div>
+    <div class="reason-card">
+      <div class="icon">✨</div>
+      <h3>Simplemente tú</h3>
+      <p>Sin más razón que ser Dilana. Eso ya es más que suficiente para amarme perdidamente.</p>
+    </div>
+    <div class="reason-card">
+      <div class="icon">🦋</div>
+      <h3>Cómo me haces sentir</h3>
+      <p>Contigo me siento en casa. Seguro, feliz y amado. Gracias por eso.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COUNTDOWN -->
+<section class="countdown-section">
+  <h2 class="section-title">Días juntos 🗓️</h2>
+  <div class="countdown-grid" id="countdownGrid">
+    <div class="count-box">
+      <span class="num" id="days">---</span>
+      <span class="label">días</span>
+    </div>
+    <div class="count-box">
+      <span class="num" id="hours">--</span>
+      <span class="label">horas</span>
+    </div>
+    <div class="count-box">
+      <span class="num" id="minutes">--</span>
+      <span class="label">minutos</span>
+    </div>
+    <div class="count-box">
+      <span class="num" id="seconds">--</span>
+      <span class="label">segundos</span>
+    </div>
+  </div>
+  <p style="margin-top:25px; opacity:0.85; font-style:italic;">...y los que nos quedan por vivir 🥰</p>
+</section>
+
+<!-- FINAL -->
+<section class="final-section">
+  <span class="big-heart">💛</span>
+  <h2>Te amo, Dilana</h2>
+  <p>Ayer, hoy y siempre. En cada momento y en cada versión de la vida.</p>
+</section>
+
+<script>
+  // Floating hearts
+  const container = document.getElementById('heartsContainer');
+  const emojis = ['💛','🌟','✨','🌻','🌼','⭐','💫','🍋','🌞','🦋'];
+  
+  for (let i = 0; i < 25; i++) {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = (6 + Math.random() * 10) + 's';
+    heart.style.animationDelay = (Math.random() * 10) + 's';
+    heart.style.fontSize = (1 + Math.random() * 1.5) + 'rem';
+    container.appendChild(heart);
+  }
+
+  // Click sparkles
+  document.addEventListener('click', (e) => {
+    for (let i = 0; i < 5; i++) {
+      const s = document.createElement('div');
+      s.className = 'sparkle';
+      s.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      s.style.left = (e.clientX + (Math.random()-0.5)*60) + 'px';
+      s.style.top = (e.clientY + (Math.random()-0.5)*60) + 'px';
+      document.body.appendChild(s);
+      setTimeout(() => s.remove(), 800);
+    }
+  });
+
+  // Countdown - change this date to your anniversary date!
+  const startDate = new Date('2025-11-21T00:00:00'); // ← CAMBIA esta fecha
+  
+  function updateCountdown() {
+    const now = new Date();
+    const diff = now - startDate;
+    if (diff < 0) return;
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('days').textContent = d;
+    document.getElementById('hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('minutes').textContent = String(m).padStart(2,'0');
+    document.getElementById('seconds').textContent = String(s).padStart(2,'0');
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
+
+</body>
+</html>
