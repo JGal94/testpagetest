@@ -665,5 +665,68 @@
   setInterval(updateCountdown, 1000);
 </script>
 
+<!-- ===== MÚSICA ===== -->
+<audio id="bgMusic" loop>
+  <source src="ytmp3free.cc_ebrio-de-amor-en-vivo-youtubemp3free.org.mp3" type="audio/mpeg">
+</audio>
+
+<button id="musicBtn" title="Reproducir / Pausar música" style="
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 9999;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #f5c800, #e0a800);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.25);
+  font-size: 1.6rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+">🎵</button>
+
+<script>
+  const music = document.getElementById('bgMusic');
+  const musicBtn = document.getElementById('musicBtn');
+  let playing = false;
+
+  musicBtn.addEventListener('click', () => {
+    if (playing) {
+      music.pause();
+      musicBtn.textContent = '🎵';
+      playing = false;
+    } else {
+      music.volume = 0.35;
+      music.play();
+      musicBtn.textContent = '⏸️';
+      playing = true;
+    }
+  });
+
+  musicBtn.addEventListener('mouseenter', () => {
+    musicBtn.style.transform = 'scale(1.12)';
+    musicBtn.style.boxShadow = '0 6px 24px rgba(0,0,0,0.32)';
+  });
+  musicBtn.addEventListener('mouseleave', () => {
+    musicBtn.style.transform = 'scale(1)';
+    musicBtn.style.boxShadow = '0 4px 18px rgba(0,0,0,0.25)';
+  });
+
+  // Intentar autoplay silencioso al primer clic en la página
+  document.addEventListener('click', () => {
+    if (!playing) {
+      music.volume = 0.35;
+      music.play().then(() => {
+        musicBtn.textContent = '⏸️';
+        playing = true;
+      }).catch(() => {});
+    }
+  }, { once: true });
+</script>
+
 </body>
 </html>
