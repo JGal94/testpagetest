@@ -550,9 +550,129 @@
     line-height: 1.7;
   }
 
+  /* ── Splash screen ── */
+  body.splash-active { overflow: hidden; }
+
+  #splashScreen {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: radial-gradient(ellipse at 50% 40%, #fffbe6 0%, #fff3b0 40%, #ffe066 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+
+  #splashScreen.hiding {
+    opacity: 0;
+    transform: scale(1.04);
+    pointer-events: none;
+  }
+
+  .splash-glow {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 30% 40%, rgba(255,220,80,0.5) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 70% 60%, rgba(255,180,60,0.3) 0%, transparent 70%);
+    animation: auroraShift 5s ease-in-out infinite alternate;
+    pointer-events: none;
+  }
+
+  .splash-emoji {
+    font-size: 5rem;
+    animation: pulse 1.6s ease-in-out infinite;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .splash-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(3rem, 10vw, 6rem);
+    background: linear-gradient(90deg, #c8960a, #e0a800, #ffe066, #e0a800, #c8960a);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmerTitle 3s linear infinite;
+    position: relative;
+    z-index: 1;
+    line-height: 1.1;
+  }
+
+  .splash-sub {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: #b8860b;
+    font-size: clamp(1rem, 3vw, 1.35rem);
+    margin-top: 14px;
+    position: relative;
+    z-index: 1;
+    opacity: 0.8;
+  }
+
+  .splash-btn {
+    margin-top: 44px;
+    position: relative;
+    z-index: 1;
+    padding: 16px 44px;
+    border-radius: 50px;
+    border: 2.5px solid #e0a800;
+    background: transparent;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5rem;
+    color: #c8960a;
+    cursor: pointer;
+    letter-spacing: 1px;
+    animation: btnPulse 2s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes btnPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(224,168,0,0.5); border-color: #e0a800; }
+    50%       { box-shadow: 0 0 0 10px rgba(224,168,0,0); border-color: #f5c800; }
+  }
+
+  .splash-hint {
+    margin-top: 20px;
+    font-size: 0.8rem;
+    color: #b8860b;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.55;
+    animation: fadeIn 2s ease 1s both;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Floating particles on splash */
+  .splash-float {
+    position: absolute;
+    font-size: 1.6rem;
+    animation: floatUp linear infinite;
+    opacity: 0;
+    pointer-events: none;
+  }
+
 </style>
 </head>
 <body>
+
+<!-- ===== SPLASH SCREEN ===== -->
+<div id="splashScreen">
+  <div class="splash-glow"></div>
+  <div class="splash-emoji">💛</div>
+  <div class="splash-title">Para Dilana</div>
+  <p class="splash-sub">una sorpresita para ti</p>
+  <div class="splash-btn">Toca para entrar 🌻</div>
+  <small class="splash-hint">· toca en cualquier lugar ·</small>
+</div>
+
 
 <!-- Floating hearts -->
 <div class="hearts-bg" id="heartsContainer"></div>
@@ -834,15 +954,35 @@
     musicBtn.style.boxShadow = '0 4px 18px rgba(0,0,0,0.25)';
   });
 
-  // Intentar autoplay silencioso al primer clic en la página
-  document.addEventListener('click', () => {
-    if (!playing) {
-      music.volume = 0.35;
-      music.play().then(() => {
-        musicBtn.textContent = '⏸️';
-        playing = true;
-      }).catch(() => {});
-    }
+  // Splash screen → start music + reveal page
+  const splash = document.getElementById('splashScreen');
+  document.body.classList.add('splash-active');
+
+  // Add floating emojis to splash
+  const splashEmojis = ['💛','🌻','✨','⭐','💫','🌟','🌼'];
+  for (let i = 0; i < 14; i++) {
+    const p = document.createElement('div');
+    p.className = 'splash-float';
+    p.textContent = splashEmojis[i % splashEmojis.length];
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.animationDuration = (6 + Math.random() * 8) + 's';
+    p.style.animationDelay = (Math.random() * 8) + 's';
+    p.style.fontSize = (1.2 + Math.random() * 1.5) + 'rem';
+    splash.appendChild(p);
+  }
+
+  splash.addEventListener('click', () => {
+    // Start music
+    music.volume = 0.35;
+    music.play().then(() => {
+      musicBtn.textContent = '⏸️';
+      playing = true;
+    }).catch(() => {});
+
+    // Hide splash
+    splash.classList.add('hiding');
+    document.body.classList.remove('splash-active');
+    setTimeout(() => splash.remove(), 950);
   }, { once: true });
 </script>
 
