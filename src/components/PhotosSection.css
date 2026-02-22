@@ -1,0 +1,84 @@
+.photos-section {
+  position: relative;
+  z-index: 1;
+  max-width: 1000px;
+  margin: 0 auto 80px;
+  padding: 20px;
+}
+
+.photos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+.photo-card {
+  border-radius: 24px;
+  height: 380px;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.photo-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease;
+}
+
+.photo-card.flipped .photo-card-inner { transform: rotateY(180deg); }
+
+.photo-front,
+.photo-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 21px;
+  overflow: hidden;
+  border: 3px solid var(--blush);
+  box-shadow: 0 15px 40px rgba(224, 168, 0, 0.18);
+  background: white;
+  box-sizing: border-box;
+}
+
+.photo-card:not(.flipped):hover .photo-front {
+  box-shadow: 0 25px 60px rgba(224, 168, 0, 0.35), 0 0 0 3px var(--pink);
+  transition: box-shadow 0.3s;
+}
+
+.photo-front img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+}
+
+.photo-front p {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.3rem;
+  color: var(--rose);
+  text-align: center;
+  padding: 15px;
+  background: white;
+}
+
+.photo-back {
+  transform: rotateY(180deg);
+  background: linear-gradient(135deg, #fff8e7, #ffe4f0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+}
+
+.photo-back p {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.6rem;
+  color: var(--rose);
+  text-align: center;
+  line-height: 1.6;
+}

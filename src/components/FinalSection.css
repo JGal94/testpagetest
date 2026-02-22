@@ -1,0 +1,42 @@
+.final-section {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 80px 20px;
+  background: radial-gradient(ellipse at 50% 100%, #fff0a0 0%, var(--cream) 70%);
+}
+
+.big-heart {
+  font-size: 6rem;
+  animation: heartbeat 1s ease-in-out infinite, heartGlow 2s ease-in-out infinite alternate;
+  display: block;
+  margin-bottom: 20px;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  14% { transform: scale(1.2); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.15); }
+  70% { transform: scale(1); }
+}
+
+@keyframes heartGlow {
+  from { filter: drop-shadow(0 0 10px rgba(224,168,0,0.4)); }
+  to   { filter: drop-shadow(0 0 35px rgba(255,200,0,0.9)); }
+}
+
+.final-section h2 {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: var(--rose);
+  margin-bottom: 15px;
+}
+
+.final-section p {
+  color: #7a6a10;
+  font-style: italic;
+  font-size: 1.2rem;
+  max-width: 500px;
+  margin: 0 auto;
+}

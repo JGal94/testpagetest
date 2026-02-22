@@ -1,0 +1,20 @@
+.hearts-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.heart {
+  position: absolute;
+  bottom: -60px;
+  animation: floatUp linear infinite;
+  opacity: 0;
+  font-size: 1.5rem;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+  100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+}

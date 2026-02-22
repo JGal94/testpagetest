@@ -1,0 +1,51 @@
+.countdown-section {
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(135deg, #e0a800, #c8960a);
+  color: white;
+  text-align: center;
+  padding: 60px 20px;
+  margin-bottom: 80px;
+}
+
+.countdown-section .section-title { color: white; }
+
+.countdown-grid {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.count-box {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 20px 30px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.count-box .num {
+  font-family: 'Dancing Script', cursive;
+  font-size: 3.5rem;
+  display: block;
+  line-height: 1;
+  animation: numGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes numGlow {
+  from { text-shadow: 0 0 10px rgba(255,255,255,0.5), 0 0 20px rgba(255,220,0,0.3); }
+  to   { text-shadow: 0 0 25px rgba(255,255,255,0.95), 0 0 50px rgba(255,200,0,0.7); }
+}
+
+.count-box .label {
+  font-size: 0.85rem;
+  opacity: 0.9;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
